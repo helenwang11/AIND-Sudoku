@@ -203,8 +203,8 @@ def search(values):
     
     # Now use recursion to solve each one of the resulting sudokus, and if one returns a value (not False), return that answer!
     for digit in values[best_box]: # choose a possible value
-        values[best_box] = digit # assign that value to the box
         new_values = values.copy() # make a copy of the current puzzle for backtracking
+        values[best_box] = digit # assign that value to the box
         ans = search(new_values) # start searching
         if ans: 
             return ans # returns answer if puzzle is solved
