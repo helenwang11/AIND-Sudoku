@@ -3,7 +3,8 @@ rows = 'ABCDEFGHI'
 cols = '123456789'
 
 def cross(A, B):
-    "Cross product of elements in A and elements in B."
+    """Cross product of elements in A and elements in B
+    """
     return [s+t for s in A for t in B]
 
 # set up all boxe labels, units, and peers dictionary
@@ -111,8 +112,10 @@ def only_choice(values):
     Go through all the units, and whenever there is a unit with a value
     that only fits in one box, assign the value to this box.
 
-    Input: Sudoku in dictionary form.
-    Output: Resulting Sudoku in dictionary form after filling in only choices.
+    Args: 
+        values: Sudoku in dictionary form.
+    Returns: 
+        Resulting Sudoku in dictionary form after filling in only choices.
     """
     
     for unit in unitlist:
@@ -127,8 +130,10 @@ def only_choice(values):
 def reduce_puzzle(values):
     """Reduce the search space for puzzle by repetitively applying eliminate, only choice, and naked twins strategy
     Stop iteration when there is no further progress
-    :param dictionary values: values dictionary representing soduku
-    :returns dictionary values: reduced values dictionary representing soduku
+    Args: 
+        values: Sudoku in dictionary form.
+    Returns:
+        Resulting Sudoku after options are reduced
     """
     stalled = False
     while not stalled:
@@ -155,8 +160,10 @@ def reduce_puzzle(values):
 
 def get_best_box(values):
     """identify the best box for starting depth first search, which is an unsolved box containing least options
-    :param dictionary values: values dictionary representing soduku
-    :returns string best_box: the best box to start depth first search
+    Args: 
+        values: Sudoku in dictionary form.
+    Returns:
+        string representing the best box to start depth first search
     """
     min_len, best_box = min([(len(value),box)for box,value in values.items() if len(value) > 1])
     return best_box
@@ -164,8 +171,10 @@ def get_best_box(values):
 
 def is_solved(values):
     """determine whether a puzzle has been solved or not
-    :param dictionary values: values dictionary representing soduku
-    :returns bool: True for solved, False for unsolved
+    Args: 
+        values: Sudoku in dictionary form.
+    Returns:
+        bool: True for solved, False for unsolved
     """
     unsolved_values = len([box for box in values.keys() if len(values[box]) != 1])
     return(unsolved_values == 0)
@@ -173,8 +182,10 @@ def is_solved(values):
 
 def search(values):
     """Using depth-first search and propagation, create a search tree and solve the sudoku.
-    :param dictionary values: values dictionary representing soduku
-    :returns dictionary values representing solved sodoku, or False if no solution is found
+    Args: 
+        values: Sudoku in dictionary form.
+    Returns:
+        dictionary representing solved sodoku, or False if no solution is found
     """
     # First, reduce the puzzle
     values = reduce_puzzle(values)
